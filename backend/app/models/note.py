@@ -70,10 +70,10 @@ class Note:
         return notes
 
     @staticmethod
-    def find_by_locname(loc_name):
+    def find_by_locname(loc_name, user_id):
         # print(f"loc_name: {loc_name}")
         notes_collection = Note.get_collection()
         notes = []
-        for note_data in notes_collection.find({"location_name": loc_name}):
+        for note_data in notes_collection.find({"location_name": loc_name, "user_id": user_id}):
             notes.append(Note(**note_data))
         return notes
