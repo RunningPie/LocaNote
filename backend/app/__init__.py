@@ -22,8 +22,8 @@ def create_app():
 
     # JWT Configuration
     app.config['JWT_TOKEN_LOCATION'] = ['cookies']
-    app.config['JWT_COOKIE_SECURE'] = True
-    app.config['JWT_COOKIE_SAMESITE'] = 'Strict'
+    app.config['JWT_COOKIE_SECURE'] = False if os.getenv("ENVIRONMENT") == "DEVELOPMENT" else True
+    app.config['JWT_COOKIE_SAMESITE'] = 'Lax' if os.getenv("ENVIRONMENT") == "DEVELOPMENT" else 'None'
 
     # Initialize JWT
     jwt = JWTManager(app)

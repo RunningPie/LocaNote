@@ -62,10 +62,14 @@ class Note:
         return None
 
     @staticmethod
-    def find_all():
+    def find_all(user_id=None):
         notes_collection = Note.get_collection()
         notes = []
-        for note_data in notes_collection.find():
+        if user_id:
+            res = notes_collection.find({"user_id": user_id})
+        else:
+            res = notes_collection.find()
+        for note_data in res:
             notes.append(Note(**note_data))
         return notes
 

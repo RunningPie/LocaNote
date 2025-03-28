@@ -31,7 +31,7 @@ def handle_notes():
             return jsonify({"error": "Failed to create note"}), 500       
         
     elif request.method == 'GET':
-        notes = Note.find_all()
+        notes = Note.find_all(current_user_id)
         return jsonify([note.to_dict() for note in notes]), 200
 
 @note_bp.route('/<note_id>', methods=['GET', 'PATCH', 'DELETE'])
